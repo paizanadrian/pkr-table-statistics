@@ -663,8 +663,8 @@ with top_left:
 
             if use_mc and p_mc_beats is not None:
                 st.markdown(
-                    f"**Prob. ≥1 adversar te bate (MC):** {p_mc_beats*100:.2f}%  \n"
-                    f"**Prob. egal (și nimeni nu te bate) (MC):** {p_mc_tieonly*100:.2f}%"
+                    f"**Prob. ≥1 adversar te bate:** {p_mc_beats*100:.2f}%  \n"
+                    f"**Prob. egal (și nimeni nu te bate):** {p_mc_tieonly*100:.2f}%"
                 )
             else:
                 st.markdown(
