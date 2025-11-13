@@ -114,7 +114,19 @@ with st.sidebar:
     )
     use_mc = st.checkbox("Monte Carlo (deal fără înlocuire)", value=True,
                         help="Simulează mii de mâini posibile (ca în joc real) pentru a aproxima probabilitățile.")
-    mc_trials = st.slider("Runde simulare", 1_000, 100_000, 20_000, step=1_000)
+    mc_trials = st.slider(
+    "Runde simulare",
+    min_value=1_000,
+    max_value=100_000,
+    value=20_000,
+    step=1_000,
+    help=(
+        "Numărul de simulări Monte Carlo efectuate pentru estimarea probabilităților. "
+        "Mai multe runde = rezultate mai precise, dar calcule mai lente. "
+        "Recomandat: 20.000 – 50.000."
+    )
+)
+
 
     st.markdown("---")
 
