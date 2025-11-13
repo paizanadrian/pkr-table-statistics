@@ -389,6 +389,19 @@ def hidden_html(big=False, scale=1.0):
         f"font-size:{font_size}px;line-height:1.0;font-weight:700'>🂠</span>"
     )
 
+def pretty_html(card: str) -> str:
+    """Întoarce rank+simbol cu roșu pentru ♥ și ♦, pentru afișare în markdown HTML."""
+    rank = card[:-1]
+    suit = card[-1]
+
+    # culoare: roșu pentru inimă / romb, altfel culoarea textului principal
+    if suit in ("♥", "♦"):
+        color = "#ff4b5c"  # roșu frumos, poți schimba dacă vrei
+    else:
+        color = "#e0e0e0"  # deschis, potrivit cu tema ta dark
+
+    return f"<span style='color:{color}; font-weight:700'>{rank}{suit}</span>"
+
 # ===== Legendă & posibile (doar la River) =====
 LEGEND_TEXT = {
     1: "Chintă roială (Royal Flush)",
@@ -854,9 +867,18 @@ if stage in ("river", "show") and stats is not None and stats.get("wins_by_class
         st.markdown(f"**{ro} — {len(hands)} combinații**")
         with st.expander("Vezi exemple"):
             show_n = min(120, len(hands))
-            txt = ", ".join(f"{hands[i][0]} {hands[i][1]}" for i in range(show_n))
+
+            # folosim pretty_html pentru a colora ♥ și ♦ în roșu
+            txt = ", ".join(
+                f"{pretty_html(hands[i][0])} {pretty_html(hands[i][1])}"
+                for i in range(show_n)
+            )
             if len(hands) > show_n:
                 txt += " ..."
-            st.write(txt)
+
+            st.markdown(txt, unsafe_allow_html=True)
 else:
-    st.markdown("*(Mâinile posibile câștigătoare pe categorii vor apărea aici după ce calculezi statisticile pe River.)*")
+    st.markdown(
+        "*(Mâinile posibile câștigătoare pe categorii vor apărea aici "
+        "după ce calculezi statisticile pe River.)*"
+    )
