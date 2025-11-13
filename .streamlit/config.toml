@@ -1,5 +1,2 @@
 [theme]
-primaryColor = "#2e7d32"     # verde
-secondaryBackgroundColor = "#c62828"  # roșu
-textColor = "#ffffff"
-font = "sans serif"
+base = "dark"
