@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(page_title="Texas Hold'em – jucători dinamici", layout="wide")
+st.set_page_config(page_title="Texas Hold'em – statistica", layout="wide")
 st.markdown("""
     <style>
     [data-testid="stAppViewContainer"] {
