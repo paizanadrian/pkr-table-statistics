@@ -90,7 +90,13 @@ with st.sidebar:
             st.warning("Seed-ul trebuie să fie un număr întreg sau gol.")
             st.session_state.seed = None
 
-    rotate_dealer = st.checkbox("Dealer rotativ (1 → N → 1)", value=st.session_state.rotate_dealer)
+    rotate_dealer = st.checkbox(
+    "Dealer rotativ (1 → N → 1)",
+    value=st.session_state.rotate_dealer,
+    help="După fiecare mână, dealerul trece automat la următorul jucător (ca la masa reală). "
+         "Dacă este debifat, dealerul rămâne același la fiecare mână."
+)
+
     st.session_state.rotate_dealer = rotate_dealer
 
     # aplică în session_state + corectează dealer dacă iese din 1..N
@@ -103,10 +109,11 @@ with st.sidebar:
     st.markdown("---")
     st.subheader("📊 Setări probabilități (River)")
     total_players = st.number_input(
-        "Număr total jucători (pentru probabilități)",
+        "Număr total jucători",
         min_value=2, max_value=10, value=num_players, step=1
     )
-    use_mc = st.checkbox("Monte Carlo (deal fără înlocuire)", value=True)
+    use_mc = st.checkbox("Monte Carlo (deal fără înlocuire)", value=True,
+                        help="Simulează mii de mâini posibile (ca în joc real) pentru a aproxima probabilitățile.")
     mc_trials = st.slider("Runde simulare", 1_000, 100_000, 20_000, step=1_000)
 
     st.markdown("---")
