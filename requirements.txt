@@ -1,0 +1,4 @@
+streamlit
+st-clickable-images
+streamlit-js-eval
+matplotlib
