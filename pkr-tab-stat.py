@@ -72,7 +72,7 @@ if "river_stats" not in st.session_state:
 
 # ===== Sidebar =====
 with st.sidebar:
-    st.header("🎮 Setări joc")
+    st.header("⚙️ Setări joc")
     num_players = st.slider("Număr de jucători", 2, 10, st.session_state.NUM_PLAYERS)
     hero = st.number_input("Numărul tău (poziția)", min_value=1, max_value=num_players,
                            value=min(st.session_state.HERO, num_players))
