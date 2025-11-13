@@ -1,0 +1,163 @@
+/* ===== Poker Table Style (robust) ===== */
+:root{
+  --felt:#0f5b3a;
+  --felt-light:#187d52;
+  --rail: #e86b17;
+}
+
+.st-key-btn_new_board button {
+    background-color: #187d52;
+}
+
+.st-key-btn_prog_board button {
+    background-color: #FF004F;
+}
+
+.st-key-btn_calc_stat button {
+    background-color: #FF004F;
+}
+
+.table-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+}
+
+/* fallback height so it always shows even if aspect-ratio unsupported */
+.poker-table{
+  position:relative;
+  width:min(980px, 96vw);
+  height:clamp(280px, 52vw, 560px);
+  border-radius:9999px;
+  margin:8px auto 14px;
+
+  background:
+    radial-gradient(120% 85% at 50% 40%, var(--felt-light) 0%, var(--felt) 40%, #0b3e29 100%);
+  box-shadow:
+    inset 0 0 0 14px var(--rail),
+    inset 0 0 0 18px rgba(0,0,0,.25),
+    inset 0 6px 22px rgba(0,0,0,.55),
+    0 12px 40px rgba(0,0,0,.45);
+  outline: 1px solid rgba(255,255,255,.06);
+}
+
+@supports (aspect-ratio: 16/9){
+  .poker-table{ height:auto; aspect-ratio:16/9; }
+}
+
+.poker-table::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  box-shadow:
+    inset 0 10px 0 rgba(255,255,255,.06),
+    inset 0 -8px 18px rgba(0,0,0,.35);
+  pointer-events:none;
+}
+
+.board-cards{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;
+  text-align:center;
+  padding:4px 8px;
+}
+
+.table-logo{
+  position:absolute;
+  left:50%; top:28%;
+  transform:translateX(-50%);
+  font: 600 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing:.06em;
+  opacity:.28;
+  color:#fff;
+  user-select:none;
+  pointer-events:none;
+  text-transform:uppercase;
+}
+
+/* ===== Player seats around the table ===== */
+.player-seat{
+  position:absolute;
+  transform:translate(-50%, -50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  z-index: 3; /* peste board */
+}
+
+.player-badge{
+  font: 600 13px/1.1 system-ui, Segoe UI, sans-serif;
+  color:#eee;
+  background: rgba(0,0,0,.55);
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 0 6px rgba(0,0,0,.35);
+  user-select:none;
+  backdrop-filter: blur(4px);
+}
+
+.player-badge.hero{
+  background:#2e7d32;
+  color:#fff;
+  border:2px solid #b4f7b4;
+  box-shadow: 0 0 12px rgba(100,255,100,.6);
+}
+
+/* ține cele 2 cărți alăturate, fără rând nou */
+.player-cards{
+  display: inline-flex;      /* nu block, ca să se muleze pe conținut */
+  flex-direction: row;
+  flex-wrap: nowrap;         /* NU rupe pe rândul următor */
+  align-items: center;
+  gap: 4px;                  /* spațiu între cărți */
+  white-space: nowrap;       /* interzice wrap chiar dacă sunt spații */
+  background: rgba(0,0,0,.28);
+  padding: 4px 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+/* asigură-te că span-urile cărților rămân inline și nu declanșează wrap */
+.player-cards > span{
+  display: inline-block;
+  white-space: nowrap;
+}
+
+
+/* ===== Dealer chip “spre interior” (poziționare globală pe masă) ===== */
+.dealer-chip{
+  position:absolute;
+  width:28px; height:28px;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  font:700 14px/28px system-ui, Segoe UI, sans-serif;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.35), inset 0 -2px 0 rgba(0,0,0,.12);
+  border:2px solid #f2f2f2;
+  animation: dealerPulse 1.4s ease-in-out infinite, dealerSpin 6s linear infinite;
+  user-select:none;
+  z-index: 7;            /* peste badges & cărți */
+  pointer-events: none;  /* să nu ia click-uri */
+  transform: translate(-50%,-50%); /* coordonate centrate exacte */
+}
+
+@keyframes dealerPulse{
+  0%{ transform: translate(-50%,-50%) scale(1); box-shadow:0 4px 10px rgba(0,0,0,.35), 0 0 0 0 rgba(255,255,255,.35);}
+  50%{ transform: translate(-50%,-50%) scale(1.06); box-shadow:0 4px 12px rgba(0,0,0,.45), 0 0 0 8px rgba(255,255,255,0);}
+  100%{ transform: translate(-50%,-50%) scale(1); box-shadow:0 4px 10px rgba(0,0,0,.35), 0 0 0 0 rgba(255,255,255,.35);}
+}
+
+@keyframes dealerSpin{
+  from{ filter:hue-rotate(0deg); }
+  to  { filter:hue-rotate(360deg); }
+}
+
+/* fundal aplicație */
+html, body [data-testid="stAppViewContainer"]{ background: #0b0f12; }
+
