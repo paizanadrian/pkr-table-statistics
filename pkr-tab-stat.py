@@ -672,18 +672,18 @@ with top_left:
                 f"**Combinații posibile pentru 1 adversar:** {M:,}  ·  "
                 f"**Te bat:** {W:,}  ·  **Egal:** {T:,}"
             )
-                        with st.expander("ℹ️ Ce înseamnă 990?"):
-            st.write("""
-                Este numărul total de combinații de 2 cărți diferite pe care le poate avea un adversar.
+            with st.expander("ℹ️ Ce înseamnă 990?"):
+                st.write("""
+                    Este numărul total de combinații de 2 cărți diferite pe care le poate avea un adversar.
 
-                Formula: **C(n, 2)** – combinații din n cărți.
+                    Formula: **C(n, 2)** – combinații din n cărți.
 
-                Exemplu pentru River:
-                - 52 cărți în pachet
-                - 7 cunoscute (2 ale tale + 5 board)
-                - rămân 45 necunoscute
-                - C(45, 2) = 990 combinații posibile pentru un adversar.
-            """)
+                    Exemplu pentru River:
+                    - 52 cărți în pachet
+                    - 7 cunoscute (2 ale tale + 5 board)
+                    - rămân 45 necunoscute
+                    - C(45, 2) = 990 combinații posibile pentru un adversar.
+                """)
             st.success(f"🃏 Mâna ta pe river: **{hero_label}** {format_hero_score(hero_score)}")
 
             if use_mc and p_mc_beats is not None:
